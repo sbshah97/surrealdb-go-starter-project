@@ -1,9 +1,11 @@
 package main
 
 import (
-	"github.com/sbshah97/surrealdb-go-starter-project/pkg/database"
+	"fmt"
+	"log"
+	"net/http"
 
-	"github.com/sbshah97/surrealdb-go-starter-project/pkg/helper"
+	"github.com/sbshah97/surrealdb-go-starter-project/pkg/handlers"
 	"github.com/surrealdb/surrealdb.go"
 )
 
@@ -14,6 +16,7 @@ const (
 	tableName = "user"
 	namespace = "test"
 	dbName    = "test"
+	port      = 8080
 )
 
 func init() {
@@ -40,18 +43,24 @@ func init() {
 }
 
 func main() {
-	createdUserData, err := database.Create(db, tableName, helper.PopulateUserData())
-	if err != nil {
-		// TODO: Remove panic and add slog
-		panic(err)
-	}
+	// createdUserData, err := database.Create(db, tableName, helper.PopulateUserData())
+	// if err != nil {
+	// 	// TODO: Remove panic and add slog
+	// 	panic(err)
+	// }
 
-	_, err = helper.UnmarshalUser(createdUserData)
-	if err != nil {
-		// TODO: Remove panic and add slog
-		panic(err)
-	}
+	// _, err = helper.UnmarshalUser(createdUserData)
+	// if err != nil {
+	// 	// TODO: Remove panic and add slog
+	// 	panic(err)
+	// }
 
+	// http.HandleFunc("/shorten", ws.ShortenURL)
+	http.HandleFunc("/", handlers.HandleDefault)
+	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+	if err != nil {
+		log.Fatalf("failed to listen: %+v", err)
+	}
 	// // Get user by ID
 	// data, err = db.Select(createdUser[0].ID)
 	// if err != nil {

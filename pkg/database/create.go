@@ -1,13 +1,16 @@
 package database
 
-import "github.com/surrealdb/surrealdb.go"
+import "golang.org/x/exp/slog"
 
-func Create(db *surrealdb.DB, thing string, data interface{}) (interface{}, error) {
+func (d Database) Create(thing string, data interface{}) (interface{}, error) {
 	// Insert user
-	data, err := db.Create(thing, data)
+	data, err := d.db.Create(thing, data)
 	if err != nil {
+		slog.Error("Unable to insert data in table: %v", err)
 		return nil, err
 	}
+
+	slog.Debug("Successfully inserted data in table")
 
 	return data, nil
 }

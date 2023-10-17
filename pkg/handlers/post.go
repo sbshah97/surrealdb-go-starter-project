@@ -1,19 +1,24 @@
 package handlers
 
-import "net/http"
+import (
+	"log/slog"
+	"net/http"
 
-func post(w http.ResponseWriter, r *http.Request) {
-	// createdUserData, err := database.Create(db, tableName, helper.PopulateUserData())
-	// if err != nil {
-	// 	// TODO: Remove panic and add slog
-	// 	panic(err)
-	// }
+	"github.com/sbshah97/surrealdb-go-starter-project/pkg/helper"
+)
 
-	// _, err = helper.UnmarshalUser(createdUserData)
-	// if err != nil {
-	// 	// TODO: Remove panic and add slog
-	// 	panic(err)
-	// }
-	w.WriteHeader(http.StatusBadRequest)
-	http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+func (h handler) post(w http.ResponseWriter, r *http.Request, tableName string) {
+	createdUserData, err := h.db.Create(tableName, helper.PopulateUserData())
+	if err != nil {
+		// TODO: Remove panic and handle response usin http writer in handler
+		slog.Error("Error in creating user data: %v", err)
+		panic(err)
+	}
+
+	_, err = helper.UnmarshalUser(createdUserData)
+	if err != nil {
+		// TODO: Remove panic and add slog
+		slog.Error("Error in creating user data: %v", err)
+		panic(err)
+	}
 }

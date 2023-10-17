@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/sbshah97/surrealdb-go-starter-project/pkg/database"
 	"github.com/sbshah97/surrealdb-go-starter-project/pkg/handlers"
 	"github.com/surrealdb/surrealdb.go"
 	"golang.org/x/exp/slog"
@@ -17,6 +18,8 @@ const (
 	namespace = "test"
 	dbName    = "test"
 	port      = 8080
+	username  = "root"
+	password  = "root"
 )
 
 func init() {
@@ -45,8 +48,24 @@ func init() {
 }
 
 func main() {
-	http.HandleFunc("/users", handlers.HandleDefault)
-	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+	db, err := database.NewDatabase(wsString, username, password, namespace, dbName)
+	if err != nil {
+		slog.Error("failed to create shortener repository: %+v", err)
+		return
+	}
+
+	slog.Info("Connected to database")
+
+	// Close connections to the database at program shutdown
+	defer func() {
+		slog.Info("Closing database")
+		db.Close()
+	}()
+
+	handler := handlers.NewHandler(db)
+
+	http.HandleFunc("/users", handler.CreateUsers)
+	err = http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
 	if err != nil {
 		slog.Error("failed to listen: %+v", err)
 	}

@@ -65,6 +65,7 @@ func main() {
 	handler := handlers.NewHandler(db)
 
 	http.HandleFunc("/users", handler.CreateUsers)
+	http.HandleFunc("/users/{id}", handler.FetchUsers)
 	err = http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
 	if err != nil {
 		slog.Error("failed to listen: %+v", err)

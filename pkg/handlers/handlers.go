@@ -23,7 +23,8 @@ func NewHandler(newDb *database.Database) *handler {
 
 func HandleDefault(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
-		get(w, r)
+		// TODO: Clean this up later
+		// get(w, r)
 	} else if r.Method == http.MethodPost {
 		// TODO: Clean this up later
 		// post(w, r)

@@ -38,7 +38,7 @@ func UpdateUsers(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func FetchUsers(w http.ResponseWriter, r *http.Request) {
+func (h handler) FetchUsers(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodGet {
 		get(w, r)
 	}

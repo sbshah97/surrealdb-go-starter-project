@@ -3,6 +3,8 @@
 ## Version 1.0.0 - 2023-10-17
 
 ### Added
+* [sbshah97] Created a `Makefile` and `golangci.yaml` file
+* [sbshah97] Upgraded to go 1.21 to remove exp packages
 * [sbshah97] Added POST Method implementation to create new users
   * Reference: https://github.com/timpratim/surreal-urlshortner/blob/master/main.go
 * [sbshah97] Added slog to go starter code (#14)

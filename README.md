@@ -10,3 +10,15 @@ SurrealDB Starter Project using Go
 - [ ] Integrate DB logic with HTTP Methods
 - [ ] Add data to DB
 - [ ] Add logging 
+
+## Running golang-ci
+
+Run `make lint`
+
+## Running tests
+
+Run `make test`
+
+## Running the application
+
+Run `make run`

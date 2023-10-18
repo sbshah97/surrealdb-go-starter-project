@@ -50,9 +50,21 @@ TODO: Move to Epic / Wiki soon
 - [x] Integrate Go HTTP Router
 - [x] Integrate simple GET/POST/PUT/DELETE event
 - [ ] Integrate DB logic with HTTP Methods
-    - [ ] Integrate GET Method
+    - [x] Integrate GET Method
     - [x] Integrate POST Method
     - [ ] Integrate PUT Method
     - [ ] Integrate DELETE Method
 - [ ] Add data to DB
 - [x] Add logging 
+
+## Running golang-ci
+
+Run `make lint`
+
+## Running tests
+
+Run `make test`
+
+## Running the application
+
+Run `make run`

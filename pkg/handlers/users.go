@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/sbshah97/surrealdb-go-starter-project/pkg/helper"
-	"golang.org/x/exp/slog"
+	"log/slog"
 )
 
 func (h handler) CreateUsers(w http.ResponseWriter, r *http.Request) {

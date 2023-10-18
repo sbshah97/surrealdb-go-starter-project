@@ -7,7 +7,7 @@ import (
 	"github.com/sbshah97/surrealdb-go-starter-project/pkg/database"
 	"github.com/sbshah97/surrealdb-go-starter-project/pkg/handlers"
 	"github.com/surrealdb/surrealdb.go"
-	"golang.org/x/exp/slog"
+	"log/slog"
 )
 
 var db *surrealdb.DB

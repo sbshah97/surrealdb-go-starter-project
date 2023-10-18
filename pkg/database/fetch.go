@@ -1,6 +1,6 @@
 package database
 
-import "golang.org/x/exp/slog"
+import "log/slog"
 
 func (d Database) Fetch(what string) (interface{}, error) {
 	// Insert user

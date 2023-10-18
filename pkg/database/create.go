@@ -1,6 +1,6 @@
 package database
 
-import "golang.org/x/exp/slog"
+import "log/slog"
 
 func (d Database) Create(thing string, data interface{}) (interface{}, error) {
 	// Insert user

@@ -1,0 +1,43 @@
+linters-settings:
+  enable-all: true
+  disable:
+    - gochecknoinits
+    - prealloc
+    - wsl
+    - gocyclo
+    - dupl
+    - gochecknoglobals
+    - govet
+    - scopelint
+    - gofmt
+    - interfacer
+    - unconvert
+    - stylecheck
+
+linters:
+  enable:
+    - deadcode
+    - errcheck
+    - varcheck
+    - structcheck
+    - maligned
+    - ineffassign
+    - gosec
+    - errcheck
+    - staticcheck
+    - unparam
+    - typecheck
+
+issues:
+  exclude:
+    - "should be .* or struct.* or .* but got '.*'"
+    - "HTTP status code .*"
+
+run:
+  fast: false
+
+output:
+  format: colored-line-number
+  colored-line-number:
+    line: true
+    column: true

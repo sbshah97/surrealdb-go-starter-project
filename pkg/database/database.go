@@ -4,7 +4,7 @@ import (
 	"fmt"
 
 	"github.com/surrealdb/surrealdb.go"
-	"golang.org/x/exp/slog"
+	"log/slog"
 )
 
 type Database struct {

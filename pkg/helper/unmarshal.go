@@ -1,13 +1,13 @@
 package helper
 
 import (
-	"fmt"
+	"log/slog"
 
 	"github.com/sbshah97/surrealdb-go-starter-project/pkg/models"
 	"github.com/surrealdb/surrealdb.go"
 )
 
-func UnmarshalUser(data interface{}) ([]models.User, error) {
+func UnmarshalUsers(data interface{}) ([]models.User, error) {
 	// Unmarshal data
 	createdUser := make([]models.User, 1)
 	err := surrealdb.Unmarshal(data, &createdUser)
@@ -15,7 +15,18 @@ func UnmarshalUser(data interface{}) ([]models.User, error) {
 		return createdUser, err
 	}
 
-	fmt.Println("Created User in DB", createdUser)
-
+	slog.Info("Created object is", createdUser)
 	return createdUser, nil
+}
+
+func UnmarshalSelectUserById(data interface{}) (models.User, error) {
+	// Unmarshal data
+	selectedUser := new(models.User)
+	err := surrealdb.Unmarshal(data, &selectedUser)
+	if err != nil {
+		return *selectedUser, err
+	}
+
+	slog.Info("Selected object is", *selectedUser)
+	return *selectedUser, nil
 }

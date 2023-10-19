@@ -34,6 +34,9 @@ surrealdb start
 
 Now, you can start coding and developing your Go project.
 
+## Install Golangci 
+
+Use the following [golang-ci link](https://golangci-lint.run/usage/install/) to install it for your setup
 
 ## Contributing
 This project is built for Hacktoberfest 2023, and anyone is welcome to contribute or make suggestions on how to enhance this template for Go development with SurrealDB.

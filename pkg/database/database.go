@@ -3,8 +3,9 @@ package database
 import (
 	"fmt"
 
-	"github.com/surrealdb/surrealdb.go"
 	"log/slog"
+
+	"github.com/surrealdb/surrealdb.go"
 )
 
 type Database struct {
@@ -19,6 +20,7 @@ type DatabaseParams struct {
 	Database  string
 }
 
+// TODO: Use database params instead of passing parameters individually
 func NewDatabase(address, user, password, namespace, database string) (*Database, error) {
 	//surreal.New is
 	db, err := surrealdb.New(address)
@@ -28,13 +30,13 @@ func NewDatabase(address, user, password, namespace, database string) (*Database
 	}
 
 	// TODO: Enable for non production instance
-	// _, err = db.Signin(map[string]interface{}{
-	// 	"user": user,
-	// 	"pass": password,
-	// })
-	// if err != nil {
-	// 	return nil, fmt.Errorf("failed to sign in: %w", err)
-	// }
+	_, err = db.Signin(map[string]interface{}{
+		"user": user,
+		"pass": password,
+	})
+	if err != nil {
+		return nil, fmt.Errorf("failed to sign in: %w", err)
+	}
 
 	_, err = db.Use(namespace, database)
 	if err != nil {

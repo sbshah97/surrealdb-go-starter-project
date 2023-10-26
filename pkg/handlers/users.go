@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 
 	"log/slog"
@@ -25,23 +26,27 @@ func (h handler) CreateUsers(w http.ResponseWriter, r *http.Request) {
 	createdUserData, err := h.db.Create("users", user)
 	if err != nil {
 		// TODO: Remove panic and handle response usin http writer in handler
-		slog.Error("Error in creating user data: %v", err)
-		http.Error(w, "Error in creating user data: Error"+err.Error(), http.StatusInternalServerError)
+		slog.Error("Error in creating user data", "error", err)
+		http.Error(w, fmt.Sprintf("Error in creating user data: %+v", err), http.StatusInternalServerError)
 		return
 	}
 
-	_, err = helper.UnmarshalUsers(createdUserData)
+	created, err := helper.UnmarshalUsers(createdUserData)
 	if err != nil {
 		// TODO: Remove panic and add slog
-		slog.Error("Error in unmarshalling user data: %v", err)
-		http.Error(w, "Error in unmarshalling user data: Error"+err.Error(), http.StatusInternalServerError)
+		slog.Error("Error in unmarshalling user data", "error", err)
+		http.Error(w, fmt.Sprintf("Error in unmarshalling user data: %+v", err.Error()), http.StatusInternalServerError)
 	}
 
 	slog.Info("Successful response for POST Request")
 
 	w.WriteHeader(http.StatusOK)
 	// TODO: Create a successful response object
-	// w.Write("Successful response")
+	err = json.NewEncoder(w).Encode(created)
+	if err != nil {
+		slog.Error("Error in encoding response", "error", err)
+		http.Error(w, fmt.Sprintf("Error in encoding response: %+v", err.Error()), http.StatusInternalServerError)
+	}
 	return
 
 }
@@ -49,24 +54,25 @@ func (h handler) CreateUsers(w http.ResponseWriter, r *http.Request) {
 func (h handler) FetchUsers(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 
-	createdUserData, err := h.db.Fetch("users:" + vars["id"])
+	readUser, err := h.db.Fetch(vars["id"])
 	if err != nil {
 		// TODO: Remove panic and handle response usin http writer in handler
-		slog.Error("Error in creating user data: %v", err)
+		slog.Error("Error in reading user data", "error", err)
 		panic(err)
 	}
 
-	userObject, err := helper.UnmarshalSelectUserById(createdUserData)
+	userObject, err := helper.UnmarshalSelectUserById(readUser)
 	if err != nil {
 		// TODO: Remove panic and add slog
-		slog.Error("Error in creating user data: %v", err)
+		slog.Error("Error in unmarshalling user data", "error", err, "readUser", readUser)
 		panic(err)
 	}
+	slog.Info("After marshalling user data", "user", userObject)
 
 	jsonObject, err := json.Marshal(userObject)
 	if err != nil {
 		// TODO: Remove panic and add slog
-		slog.Error("Error in marshalling JSON object: %v", err)
+		slog.Error("Error in marshalling JSON object", "error", err)
 		panic(err)
 	}
 

@@ -25,8 +25,8 @@ func NewDatabase(address, user, password, namespace, database string) (*Database
 	//surreal.New is
 	db, err := surrealdb.New(address)
 	if err != nil {
-		slog.Error("Unable to initialise SurrealDB", err)
-		return nil, fmt.Errorf("failed to connect to database: %s", err)
+		slog.Error("Unable to initialise SurrealDB", "error", err)
+		return nil, fmt.Errorf("failed to connect to database: %w", err)
 	}
 
 	// TODO: Enable for non production instance
@@ -40,7 +40,7 @@ func NewDatabase(address, user, password, namespace, database string) (*Database
 
 	_, err = db.Use(namespace, database)
 	if err != nil {
-		slog.Error("Unable to use DB", err)
+		slog.Error("Unable to use DB", "error", err)
 		return nil, err
 	}
 

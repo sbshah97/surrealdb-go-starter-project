@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
@@ -25,7 +26,7 @@ const (
 func main() {
 	db, err := database.NewDatabase(wsString, username, password, namespace, dbName)
 	if err != nil {
-		slog.Error("failed to create shortener repository: %+v", err)
+		slog.Error("failed to create shortener repository", "error", err)
 		return
 	}
 
@@ -44,8 +45,9 @@ func main() {
 	r.HandleFunc("/users", handler.CreateUsers).Methods("POST")
 	http.Handle("/", r)
 
+	slog.Info(fmt.Sprintf("Listening on http://localhost:%d", port))
 	err = http.ListenAndServe(":"+strconv.Itoa(port), nil)
 	if err != nil {
-		slog.Error("failed to listen: %+v", err)
+		slog.Error("failed to listen", "error", err)
 	}
 }

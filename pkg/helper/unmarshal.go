@@ -1,6 +1,7 @@
 package helper
 
 import (
+	"fmt"
 	"log/slog"
 
 	"github.com/sbshah97/surrealdb-go-starter-project/pkg/models"
@@ -21,12 +22,37 @@ func UnmarshalUsers(data interface{}) ([]models.User, error) {
 
 func UnmarshalSelectUserById(data interface{}) (models.User, error) {
 	// Unmarshal data
-	selectedUser := new(models.User)
-	err := surrealdb.Unmarshal(data, &selectedUser)
-	if err != nil {
-		return *selectedUser, err
+	arr, ok := data.([]interface{})
+	if !ok {
+		return models.User{}, fmt.Errorf("Expected the data to be an array but instead was %T", data)
 	}
+	if len(arr) != 1 {
+		return models.User{}, fmt.Errorf("Expected the data to be an array of length 1 but instead was %d", len(arr))
+	}
+	resultMap, ok := arr[0].(map[string]interface{})
+	if !ok {
+		return models.User{}, fmt.Errorf("Expected the data to be an object but instead was %T", arr[0])
+	}
+	userMapArrayIface, ok := resultMap["result"]
+	if !ok {
+		return models.User{}, fmt.Errorf("Expected the data to be an object with a'result' key but instead was %T", resultMap)
+	}
+	userMapArray, ok := userMapArrayIface.([]interface{})
+	if !ok {
+		return models.User{}, fmt.Errorf("Expected the data to be an array of objects but instead was %T", userMapArrayIface)
+	}
+	if len(userMapArray) != 1 {
+		return models.User{}, fmt.Errorf("Expected the data to be an array of length 1 but instead was %d", len(userMapArray))
+	}
+	userMap, ok := userMapArray[0].(map[string]interface{})
+	if !ok {
+		return models.User{}, fmt.Errorf("Expected the data to be an object but instead was %T", userMapArrayIface)
+	}
+	user := models.User{}
+	user.ID = userMap["id"].(string)
+	user.Name = userMap["name"].(string)
+	user.Surname = userMap["surname"].(string)
 
-	slog.Info("Selected object is", *selectedUser)
-	return *selectedUser, nil
+	slog.Info("Created object is", "user", user)
+	return user, nil
 }

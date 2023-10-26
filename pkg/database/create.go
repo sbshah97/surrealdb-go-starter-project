@@ -10,7 +10,7 @@ func (d Database) Create(thing string, data interface{}) (interface{}, error) {
 
 	data, err := d.db.Create(thing, data)
 	if err != nil {
-		slog.Error("Unable to insert data in table: %v", err)
+		slog.Error("Unable to insert data in table", "error", err)
 		return nil, err
 	}
 

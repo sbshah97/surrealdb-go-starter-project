@@ -1,6 +1,8 @@
 # SurrealDB Go Starter Project
 Welcome to the SurrealDB Go Starter Project, a solid foundation for your Go projects powered by SurrealDB.
 
+![SurrealDB Starter GIF](assets/go-starter-project.gif)
+
 ## Getting Started
 To start a new Go project using this template, you can clone or download this repository.
 

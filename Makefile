@@ -43,7 +43,7 @@ run: build
 	@./bin/$(BINARY_NAME)-$(OS)-$(ARCH)
 
 test:
-	@go test -v
+	@go test -v ./...
 
 lint: 
 	@golangci-lint run --fix --print-resources-usage --allow-parallel-runners --color always

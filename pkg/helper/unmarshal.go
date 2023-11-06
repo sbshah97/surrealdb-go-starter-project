@@ -16,7 +16,7 @@ func UnmarshalUsers(data interface{}) ([]models.User, error) {
 		return createdUser, err
 	}
 
-	slog.Info("Created object is", createdUser)
+	slog.Info("Created object is ", "Created User: ", createdUser)
 	return createdUser, nil
 }
 

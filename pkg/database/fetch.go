@@ -3,7 +3,7 @@ package database
 import "log/slog"
 
 func (d Database) Fetch(userID string) (interface{}, error) {
-	slog.Debug("ID passed to select", userID)
+	slog.Debug("ID passed to select", "UserID", userID)
 
 	// Select user by ID passed
 	vars := make(map[string]interface{})

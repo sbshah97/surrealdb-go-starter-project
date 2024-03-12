@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -45,7 +44,7 @@ func main() {
 	r.HandleFunc("/users", handler.CreateUsers).Methods("POST")
 	http.Handle("/", r)
 
-	slog.Info(fmt.Sprintf("Listening on http://localhost:%d", port))
+	slog.Info("Listening on http://localhost:" + strconv.Itoa(port))
 	err = http.ListenAndServe(":"+strconv.Itoa(port), nil)
 	if err != nil {
 		slog.Error("failed to listen", "error", err)

@@ -54,6 +54,9 @@ Run `make run`
 
 ## Sample Run To Db
 
+### Description
+- This command retrieves user data from the application. Replace `Ishrat` and `Shah` with your desired input.
+
 ```bash
 curl --location 'http://0.0.0.0:8080/users' \
 --header 'Content-Type: application/json' \
@@ -64,9 +67,9 @@ curl --location 'http://0.0.0.0:8080/users' \
 ```
 
 ## Contributing
-This project is built for Hacktoberfest 2023, and anyone is welcome to contribute or make suggestions on how to enhance this template for Go development with SurrealDB.
+This project is built for Hacktoberfest 2023, and anyone is welcome to contribute or offer suggestions on how to enhance this template for Go development with SurrealDB.
 
-Feel free to open pull requests or issues, and I'll review them as soon as possible.
+You are encouraged to open pull requests or issues, and I'll review them as soon as possible.  
 
 Happy coding with SurrealDB for Go!
 

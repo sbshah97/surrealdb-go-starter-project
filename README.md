@@ -52,6 +52,17 @@ Run `make test`
 
 Run `make run`
 
+## Sample Run To Db
+
+```bash
+curl --location 'http://0.0.0.0:8080/users' \
+--header 'Content-Type: application/json' \
+--data '{
+    "name": "Ishrat",
+    "surname": "Shah"
+}'
+```
+
 ## Contributing
 This project is built for Hacktoberfest 2023, and anyone is welcome to contribute or make suggestions on how to enhance this template for Go development with SurrealDB.
 

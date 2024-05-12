@@ -1,0 +1,15 @@
+# docker-compose.yml
+services:
+  db:
+    image: surrealdb/surrealdb:latest
+    ports:
+      - "8000:8000"
+    environment:
+      - SURREALDB_ROOT_PASSWORD=root
+    command: ["start", "--log", "info", "--user", "root", "--pass", "root"]
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db

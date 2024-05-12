@@ -13,7 +13,7 @@ import (
 )
 
 const (
-	wsString  = "ws://localhost:8000/rpc"
+	wsString  = "ws://db:8000/rpc"
 	tableName = "user"
 	namespace = "test"
 	dbName    = "test"

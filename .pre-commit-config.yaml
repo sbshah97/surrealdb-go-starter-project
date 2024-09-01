@@ -1,0 +1,9 @@
+# .pre-commit-config.yaml
+repos:
+  - repo: local
+    hooks:
+      - id: go-test
+        name: Run Go Tests
+        entry: go test ./...
+        language: golang
+        types: [go]

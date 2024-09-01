@@ -47,8 +47,6 @@ func (h handler) CreateUsers(w http.ResponseWriter, r *http.Request) {
 		slog.Error("Error in encoding response", "error", err)
 		http.Error(w, fmt.Sprintf("Error in encoding response: %+v", err.Error()), http.StatusInternalServerError)
 	}
-	return
-
 }
 
 func (h handler) FetchUsers(w http.ResponseWriter, r *http.Request) {
@@ -78,6 +76,7 @@ func (h handler) FetchUsers(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
-	w.Write(jsonObject)
-	return
+	if _, err := w.Write(jsonObject); err != nil {
+		slog.Error("Error writing response", "error", err)
+	}
 }

@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 	"strconv"
+	"time"
 
 	"log/slog"
 
@@ -45,8 +46,16 @@ func main() {
 	http.Handle("/", r)
 
 	slog.Info("Listening on http://localhost:" + strconv.Itoa(port))
-	err = http.ListenAndServe(":"+strconv.Itoa(port), nil)
+	server := &http.Server{
+		Addr:         ":" + strconv.Itoa(port),
+		Handler:      r,
+		ReadTimeout:  5 * time.Second,
+		WriteTimeout: 10 * time.Second,
+		IdleTimeout:  15 * time.Second,
+	}
+	err = server.ListenAndServe()
 	if err != nil {
 		slog.Error("failed to listen", "error", err)
 	}
+
 }

@@ -1,0 +1,6 @@
+# .pre-commit-hooks.yaml
+- id: go-test
+  name: Run Go Tests
+  entry: go test -v ./...
+  language: golang
+  types: [go]

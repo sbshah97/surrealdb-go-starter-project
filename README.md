@@ -73,6 +73,37 @@ You are encouraged to open pull requests or issues, and I'll review them as soon
 
 Happy coding with SurrealDB for Go!
 
+
+## Pre-commit Hook Setup
+
+To ensure code quality and that all tests pass before committing, we use pre-commit hooks.
+
+### Install pre-commit
+
+First, install pre-commit using pip:
+
+```bash
+pip install pre-commit
+```
+
+### Install pre-commit hooks
+
+Run the following command to install the pre-commit hook:
+
+```bash
+pre-commit install
+```
+
+
+### Running pre-commit manually
+
+You can run pre-commit manually on all files with:
+
+```bash
+pre-commit run --all-files
+```
+
+
 ## Project Roadmap
 
 TODO: Move to Epic / Wiki soon

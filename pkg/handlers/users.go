@@ -80,3 +80,38 @@ func (h handler) FetchUsers(w http.ResponseWriter, r *http.Request) {
 		slog.Error("Error writing response", "error", err)
 	}
 }
+
+func (h handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	var user models.User
+
+	// Parse the JSON data from the request body
+	err := json.NewDecoder(r.Body).Decode(&user)
+	if err != nil {
+		slog.Error("Error in unmarshalling PUT request")
+		http.Error(w, "Invalid JSON data", http.StatusBadRequest)
+		return
+	}
+
+	updatedUserData, err := h.db.Update(vars["id"], user)
+	if err != nil {
+		slog.Error("Error in updating user data", "error", err)
+		http.Error(w, fmt.Sprintf("Error in updating user data: %+v", err), http.StatusInternalServerError)
+		return
+	}
+
+	updated, err := helper.UnmarshalUsers(updatedUserData)
+	if err != nil {
+		slog.Error("Error in unmarshalling updated user data", "error", err)
+		http.Error(w, fmt.Sprintf("Error in unmarshalling updated user data: %+v", err.Error()), http.StatusInternalServerError)
+	}
+
+	slog.Info("Successful response for PUT Request")
+
+	w.WriteHeader(http.StatusOK)
+	err = json.NewEncoder(w).Encode(updated)
+	if err != nil {
+		slog.Error("Error in encoding response", "error", err)
+		http.Error(w, fmt.Sprintf("Error in encoding response: %+v", err.Error()), http.StatusInternalServerError)
+	}
+}

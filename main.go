@@ -41,7 +41,7 @@ func main() {
 	handler := handlers.NewHandler(db)
 
 	r := mux.NewRouter()
-	r.HandleFunc("/users/{id}", handler.FetchUsers).Methods("GET")
+	r.HandleFunc("/users/{id}", handler.FetchUsers).Methods("GET", "PUT")
 	r.HandleFunc("/users", handler.CreateUsers).Methods("POST")
 	http.Handle("/", r)
 

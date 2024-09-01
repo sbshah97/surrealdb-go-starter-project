@@ -114,4 +114,5 @@ func (h handler) UpdateUser(w http.ResponseWriter, r *http.Request) {
 		slog.Error("Error in encoding response", "error", err)
 		http.Error(w, fmt.Sprintf("Error in encoding response: %+v", err.Error()), http.StatusInternalServerError)
 	}
+
 }

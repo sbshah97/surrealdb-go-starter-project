@@ -7,3 +7,8 @@ repos:
         entry: go test ./...
         language: golang
         types: [go]
+      - id: go-lint
+        name: Run Go Lint
+        entry: golangci-lint run
+        language: golang
+        types: [go]

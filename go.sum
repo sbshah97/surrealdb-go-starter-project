@@ -12,8 +12,8 @@ github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZb
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
-github.com/surrealdb/surrealdb.go v0.3.2 h1:ynBbD0onW+M4BXhZ1+dDdVnNcaqBqFlHaHCFnk8LgmQ=
-github.com/surrealdb/surrealdb.go v0.3.2/go.mod h1:A0zahuChOaJtvTm2lefQnV+6aJtgqNLm9TIdYhZbw1Q=
+github.com/surrealdb/surrealdb.go v0.5.0 h1:7dB/cZr11rhAjGJSDLNrUyZUmCE1lxJj1FgNp7nakNs=
+github.com/surrealdb/surrealdb.go v0.5.0/go.mod h1:A0zahuChOaJtvTm2lefQnV+6aJtgqNLm9TIdYhZbw1Q=
 github.com/x448/float16 v0.8.4 h1:qLwI1I70+NjRFUR3zs1JPUCgaCXSh3SW62uAKT1mSBM=
 github.com/x448/float16 v0.8.4/go.mod h1:14CWIYCyZA/cWjXOioeEpHeN/83MdbZDRQHoFcYsOfg=
 gopkg.in/yaml.v3 v3.0.1 h1:fxVm/GzAzEWqLHuvctI91KS9hhNmmWOoWu0XTYJS7CA=

@@ -4,7 +4,7 @@ go 1.22
 
 require (
 	github.com/gorilla/mux v1.8.1
-	github.com/surrealdb/surrealdb.go v0.3.2
+	github.com/surrealdb/surrealdb.go v0.5.0
 )
 
 require (

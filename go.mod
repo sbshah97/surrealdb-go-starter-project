@@ -1,10 +1,10 @@
 module github.com/sbshah97/surrealdb-go-starter-project
 
-go 1.22
+go 1.23
 
 require (
 	github.com/gorilla/mux v1.8.1
-	github.com/surrealdb/surrealdb.go v0.6.1
+	github.com/surrealdb/surrealdb.go v0.9.0
 )
 
 require (

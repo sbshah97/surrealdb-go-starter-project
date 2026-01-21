@@ -1,5 +1,10 @@
 # Changelog
 
+## Version 1.0.1 - 2024-07-28
+
+### Added
+* [sbshah97] Added PUT method implementation to update users
+
 ## Version 1.0.0 - 2023-10-20
 
 ### Added
